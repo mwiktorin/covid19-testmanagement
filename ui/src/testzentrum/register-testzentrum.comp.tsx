@@ -5,7 +5,7 @@ import { TestzentrumService } from './testzentrum.service';
 import './register-testzentrum.css';
 import { Button } from 'primereact/button';
 
-interface RegisterTestzentrumProps {
+export interface RegisterTestzentrumProps {
     testzentrumService: TestzentrumService
 }
 
@@ -15,10 +15,7 @@ export const RegisterTestzentrum = (props: RegisterTestzentrumProps) => {
     const [anschrift, setAnschrift] = React.useState("");
     const [telefonnummer, setTelefonnummer] = React.useState("");
 
-    const handleSubmit = () => {
-        debugger
-        return props.testzentrumService.addNewTestzentrum(new TestzentrumDto(name, plz, anschrift, telefonnummer));
-    };
+    const handleSubmit = () => props.testzentrumService.addNewTestzentrum(new TestzentrumDto(name, plz, anschrift, telefonnummer));
 
     return (
         <>
