@@ -4,6 +4,8 @@ const PatientController = require('../patient/controller');
 const Testzentrum = require('./testzentrum');
 const TestCenterController = require('./controller');
 
+const { defaultErrorWrapper } = require('../error');
+
 function TestCenterRouter() {
     const router = express.Router();
     const testCenterController = new TestCenterController();
@@ -30,7 +32,7 @@ function TestCenterRouter() {
     });
 
     // route for requesting a test
-    router.post('/test-beantragen/:uuid', async function (req, res) {
+    router.post('/test-beantragen/:uuid', defaultErrorWrapper(async function (req, res) {
         // retrieve requestor data
         const uuid = req.params.uuid;
         const patient = patientController.get(uuid);
@@ -42,7 +44,7 @@ function TestCenterRouter() {
             testCenter: testCenter,
             when: testSlot.begin.unix(),
         });
-    });
+    }));
 
     this.router = router;
 }
