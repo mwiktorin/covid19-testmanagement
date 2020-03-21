@@ -1,0 +1,26 @@
+{
+  "name": "covid19-testmanagement",
+  "version": "1.0.0",
+  "description": "Hallo Markus",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start:local": "node node_modules/nodemon/bin/nodemon.js src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwiktorin/covid19-testmanagement.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwiktorin/covid19-testmanagement/issues"
+  },
+  "homepage": "https://github.com/mwiktorin/covid19-testmanagement#readme"
+}
