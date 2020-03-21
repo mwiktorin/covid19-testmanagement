@@ -1,12 +1,13 @@
 const express = require('express');
 const path = require('path');
-const testzentrum = require('./testzentrum/router');
+const bodyParser = require('body-parser')
+const TestZentrum = require('./testzentrum/router');
 
 const app = express();
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../ui/build')));
 
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.use('/api/testzentrum', testzentrum);
+app.use('/api/testzentrum', new TestZentrum().router);
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req,res) => {
@@ -17,7 +18,7 @@ app.get('/api/getList', (req,res) => {
 
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'../client/build/index.html'));
+    res.sendFile(path.join(__dirname+'../ui/build/index.html'));
 });
 
 

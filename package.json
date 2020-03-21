@@ -4,8 +4,10 @@
   "description": "Hallo Markus",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "uuid": "^7.0.2"
   },
   "devDependencies": {},
   "scripts": {

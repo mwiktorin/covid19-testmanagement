@@ -1,18 +1,31 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express')
 
-// middleware that is specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
-// define the home page route
-router.get('/', function(req, res) {
-  res.send('Birds home page');
-});
-// define the about route
-router.get('/about', function(req, res) {
-  res.send('About birds');
-});
+const Testzentrum = require('./testzentrum')
+const TestCenterController = require('./controller')
 
-module.exports = router;
+function TestCenterRouter() {
+    const router = express.Router()
+    const testCenterController = new TestCenterController()
+    
+    // define the home page route
+    router.post('/', function(req, res) {
+        const testzentrum = new Testzentrum({...req.body});
+        testCenterController.add(testzentrum);
+        res.status(200).json(testzentrum);
+    });
+
+    router.put('/:uuid', function(req, res) {
+        const {parallel, durationInMinutes, fromMinute, toMinute} = req.body;
+        testCenterController.generateZeitSlots(req.params.uuid, parallel, durationInMinutes, fromMinute, toMinute);
+        res.sendStatus(200);
+    });
+
+    // define the about route
+    router.get('/', function(req, res) {
+        res.json(testCenterController.list());
+    });
+
+    this.router = router;
+}
+
+module.exports = TestCenterRouter;
