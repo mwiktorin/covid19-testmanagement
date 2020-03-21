@@ -8,7 +8,7 @@ export class HttpService {
     }
 
     async post<T>(url: string, data: T): Promise<AxiosResponse> {
-        return await Axios.post(`${host}${url}`, data)
+        return await Axios.post(`${host}${url}`, data);
     }
 
     async delete(url: string) {

@@ -1,5 +1,9 @@
 # covid19-testmanagement
 #WirVsVirusHackathon
 
-Hallo Markus
-Haha
+## Start App with Docker
+```
+docker build -t get-me-tested:latest .
+
+docker run -d -p 5000:5000 get-me-tested
+```
