@@ -15,6 +15,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-router-dom": "^5.1.2",
+    "react-transition-group": "^4.3.0",
     "classnames": "^2.2.6",
     "primeicons": "^2.0.0",
     "primereact": "^4.1.2"
