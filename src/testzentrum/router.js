@@ -41,7 +41,13 @@ function TestCenterRouter() {
 
         // send answer
         res.status(200).json({
-            testCenter: testCenter,
+            testCenter: {
+                uuid: testCenter.uuid,
+                name: testCenter.name,
+                telefonnummer: testCenter.telefonnummer,
+                anschrift: testCenter.anschrift,
+                plz: testCenter.plz,
+            },
             when: testSlot.begin.unix(),
         });
     }));

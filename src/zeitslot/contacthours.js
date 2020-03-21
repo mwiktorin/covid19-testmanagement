@@ -11,7 +11,8 @@ class TestSlot {
         enumerable: true,
         get: function () {
           return this.contactHours.begin.add(
-            slotId * this.contactHours.slotDurationInMinutes, 'minutes');
+            slotId * this.contactHours.timeSlotDurationMinutes, 'minute'
+          );
         }
       },
       end: {
@@ -19,7 +20,8 @@ class TestSlot {
         enumerable: true,
         get: function () {
           return this.contactHours.begin.add(
-            (slotId + 1) * this.contactHours.slotDurationInMinutes, 'minutes');
+            (slotId + 1) * this.contactHours.timeSlotDurationMinutes, 'minute'
+          );
         }
       }
     });
@@ -44,10 +46,10 @@ class ContactHours {
   /// Finds next available slot ID.
   findFreeSlot() {
     if (this.reservedSlots.length < this.timeSlots) {
-      return new TestSlot(this,
-        this.reservedSlots.findIndex(element => !element)
-        || this.reservedSlots.length
-      );
+      var freeSlotIdx = this.reservedSlots.findIndex(element => !element);
+      if (freeSlotIdx < 0) freeSlotIdx = this.reservedSlots.length;
+
+      return new TestSlot(this, freeSlotIdx);
     } else {
       return null;
     }
