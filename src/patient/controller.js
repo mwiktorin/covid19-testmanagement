@@ -11,9 +11,16 @@ function PatientController() {
         return Object.values(patienten);
     };
 
-    this.get = function (uuid) {
+    this.getByUuid = function (uuid) {
         return patienten[uuid];
-    }
+    };
+    this.getByEmailAddress = function (emailAddress) {
+        return Object.values(patienten).find((patient) => patient.email == emailAddress);
+    };
+
+    this.checkPassword = function (patient, password) {
+        return patient.passwort == password;
+    };
 
     mockData.mockPatients(this);
 }

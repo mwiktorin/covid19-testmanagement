@@ -17,7 +17,7 @@ class TestCenterSession extends Session {
     super(TestCenterSession.ROLE, testCenterData);
   }
 }
-TestCenterSession.ROLE = 'test-center':
+TestCenterSession.ROLE = 'test-center';
 
 module.exports = {
   PatientSession,

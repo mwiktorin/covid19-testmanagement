@@ -8,7 +8,13 @@ async function mockPatients(controller) {
 
   const Patient = require('./patient/patient');
 
-  var patient = new Patient('Max', 'Mustermann', '0123456789', 'Testgasse 1', 49219);
+  var patient = Object.assign(new Patient('maxmustermann@test.de', 'musterpass'), {
+    vorname: 'Max',
+    nachname: 'Mustermann',
+    telefonnummer: '0123456789',
+    anschrift: 'Testgasse 1',
+    plz: 49219
+  });
   controller.add(patient);
   console.log(`Mock Patient with UUID ${patient.uuid}`);
 }
