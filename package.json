@@ -14,7 +14,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
-    "start:local": "node node_modules/nodemon/bin/nodemon.js src/server.js"
+    "start:local": "ENV=local node node_modules/nodemon/bin/nodemon.js src/server.js"
   },
   "repository": {
     "type": "git",
