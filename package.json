@@ -5,10 +5,16 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "collections": "^5.1.9",
+    "dayjs": "^1.8.23",
     "express": "^4.17.1",
+    "geolib": "^3.2.1",
+    "install": "^0.13.0",
     "nodemon": "^2.0.2",
     "uuid": "^7.0.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.8"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,26 +1,49 @@
-const Zeitslot = require("../zeitslot/zeitslot")
 const { v4 }  = require("uuid");
+const SortedSet = require('collections/sorted-set');
 
 class Testzentrum {
 
-    constructor(name, telefonnummer, anschrift, plz) {
+    constructor(name, telefonnummer, anschrift, plz, koordinaten) {
         this.uuid = v4();
         this.name = name;
         this.telefonnummer = telefonnummer;
         this.anschrift = anschrift;
         this.plz = plz;
-        this.zeitslots = [];
+        this.koordinaten = koordinaten;
+
+        this.contactHours = new SortedSet(
+            [],
+            (a, b) => a == b,
+            (a, b) => a.begin.unix() - b.begin.unix()
+        );
     }
 
-    addZeitslots(parallel, durationInMinutes, fromMinute, toMinute) {
-        let minute = fromMinute;
-        while(minute + durationInMinutes < toMinute) {
-            for(let i = 0; i < parallel; i++) {
-                const slot = new Zeitslot(minute, durationInMinutes);
-                this.zeitslots.push(slot);
+    addContactHours(contactHours) {
+        this.contactHours.push(contactHours);
+    }
+
+    findFreeTestSlot() {
+        var earliestSlot = null;
+        var contactHoursIt = this.contactHours.iterate();
+        var contactHours;
+        while (contactHours = contactHoursIt.next().value) {
+            if (earliestSlot == null) {
+                earliestSlot = contactHours.findFreeSlot();
+            } else if (contactHours.begin <= earliestSlot.begin) {
+
+                var freeSlot = contactHours.findFreeSlot();
+                if (freeSlot && freeSlot.begin < earliestSlot.begin) {
+                    earliestSlot = freeSlot;
+                }
+
+            } else {
+                // this.contactHours sorted by beginning date, so following
+                // contact hours would only yield later slots
+                break;
             }
-            minute += durationInMinutes;
         }
+
+        return earliestSlot;
     }
 }
 
