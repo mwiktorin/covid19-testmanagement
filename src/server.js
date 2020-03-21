@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const TestZentrumRouter = require('./testzentrum/router');
 const PatientRouter = require('./patient/router');
 const cors = require('cors');
+const session = require('express-session');
 
 const app = express();
 
@@ -13,6 +14,11 @@ if (process.env.ENV === 'local') {
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../ui/build')));
+app.use(session({
+    resave: true,
+    saveUninitialized: false,
+    secret: 'wirvsvirussurivsvriw',
+}))
 
 app.use('/api/testzentrum', new TestZentrumRouter().router);
 app.use('/api/patient', new PatientRouter().router);
