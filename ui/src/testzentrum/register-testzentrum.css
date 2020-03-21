@@ -1,5 +1,34 @@
-.center-vertically {
+h1 {
+    text-align: center;
+}
+
+.container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-row > label {
+    width: 150px;
+}
+
+.form-row > input {
+    width: 250px;
+}
+
+button[type="submit"] {
+    align-self: flex-end;
 }

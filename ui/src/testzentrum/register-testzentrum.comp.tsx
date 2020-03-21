@@ -15,39 +15,43 @@ export const RegisterTestzentrum = (props: RegisterTestzentrumProps) => {
     const [plz, setPlz] = useState("");
     const [anschrift, setAnschrift] = useState("");
     const [telefonnummer, setTelefonnummer] = useState("");
+    const [form, setForm] = useState();
     const [growl, setGrowl] = useState();
 
     const handleSubmit = () =>
         props.testzentrumService.addNewTestzentrum(new TestzentrumDto(name, plz, anschrift, telefonnummer))
-            .then(() => growl.show({severity: 'success', summary: 'Anfrage erfolgreich'}))
+            .then(() => {
+                form.reset();
+                growl.show({severity: 'success', summary: 'Anfrage erfolgreich'});
+            })
             .catch(() => growl.show({severity: 'error', summary: 'Anfrage fehlgeschlagen'}));
 
     return (
-        <>
+        <div className={"container"}>
             <h1>Registrierung</h1>
-            <form className={"center-vertically"} onSubmit={event => {
+            <form ref={(el) => setForm(el)} onSubmit={event => {
                 event.preventDefault();
                 handleSubmit();
             }}>
-                <div className={"d-flex"}>
+                <div className={"form-row"}>
                     <label>Name der Station</label>
-                    <InputText onChange={(e) => setName(e.currentTarget.value)}/>
+                    <InputText required={true} onChange={(e) => setName(e.currentTarget.value)}/>
                 </div>
-                <div>
+                <div className={"form-row"}>
                     <label>PLZ</label>
-                    <InputText onChange={(e) => setPlz(e.currentTarget.value)}/>
+                    <InputText required={true} onChange={(e) => setPlz(e.currentTarget.value)}/>
                 </div>
-                <div>
+                <div className={"form-row"}>
                     <label>Straße/Nr.</label>
-                    <InputText onChange={(e) => setAnschrift(e.currentTarget.value)}/>
+                    <InputText required={true} onChange={(e) => setAnschrift(e.currentTarget.value)}/>
                 </div>
-                <div>
+                <div className={"form-row"}>
                     <label>Telefonnummer</label>
-                    <InputText onChange={(e) => setTelefonnummer(e.currentTarget.value)}/>
+                    <InputText required={true} onChange={(e) => setTelefonnummer(e.currentTarget.value)}/>
                 </div>
                 <Button label={"Registrieren"} type={"submit"}/>
             </form>
             <Growl ref={(el) => setGrowl(el)}/>
-        </>
+        </div>
     );
 };
