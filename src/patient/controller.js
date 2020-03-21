@@ -1,13 +1,21 @@
+const mockData = require('../mock-data');
+
 function PatientController() {
-    const patienten = [];
+    const patienten = {};
 
     this.add = function (patient) {
-        patienten.push(patient)
+        patienten[patient.uuid] = patient;
     };
 
     this.list = function () {
-        return patienten;
+        return Object.values(patienten);
     };
+
+    this.get = function (uuid) {
+        return patienten[uuid];
+    }
+
+    mockData.mockPatients(this);
 }
 
 module.exports = PatientController;
