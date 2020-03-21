@@ -5,6 +5,10 @@ import {Testzentrum} from "./testzentrum/testzentrum.comp";
 import {Home} from "./home/home.comp";
 import {PatientService} from "./patient/patient.service";
 
+import 'primereact/resources/primereact.min.css';
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primeicons/primeicons.css';
+
 function App() {
     return (
         <>
