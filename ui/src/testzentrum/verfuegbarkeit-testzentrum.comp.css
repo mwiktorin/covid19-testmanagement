@@ -1,0 +1,18 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    margin-bottom: 30px;
+    align-items: center;
+    grid-row-gap: 10px;
+}
+
+.bottom-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    grid-row-gap: 10px;
+}
+
+.p-checkbox + label {
+    vertical-align: baseline;
+}
