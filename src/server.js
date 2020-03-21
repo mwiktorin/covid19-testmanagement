@@ -3,8 +3,12 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const TestZentrumRouter = require('./testzentrum/router');
 const PatientRouter = require('./patient/router');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../ui/build')));
 
