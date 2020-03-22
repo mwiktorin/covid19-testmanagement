@@ -1,6 +1,6 @@
 import Axios, {AxiosResponse} from "axios";
 
-const host = `http://localhost:5000/`;
+const host = `/`;
 
 export class HttpService {
     async get<T>(url: string): Promise<{ data: T }> {
