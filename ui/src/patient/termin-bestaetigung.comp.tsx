@@ -25,13 +25,13 @@ export const TerminBestaetigung = (props: TerminBestaetigungProps) => {
             <p>
                 {props.termin.testCenter.name} <br/>
                 Telefonnummer: {props.termin.testCenter.telefonnummer} <br/>
-                Anschrift: {props.termin.testCenter.anschrift} <br/>
-                Postleitzahl: {props.termin.testCenter.plz}
+                {props.termin.testCenter.anschrift} <br/>
+                {props.termin.testCenter.plz}
             </p>
             <h2>
                 Anfahrt
             </h2>
-            <iframe width="600" height="500"
+            <iframe width="500" height="500"
                     title={"Anfahrt"}
                     src={`https://maps.google.com/maps?q=${query}&output=embed`}
                     frameBorder="0" scrolling="no"/>
