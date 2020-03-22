@@ -5,15 +5,15 @@ export const Home = () => (
     <>
         <h1>GetMeTested</h1>
         <p>
-            Durch GetMeTested soll eine Plattform geschaffen werden, die einen geordneten und übersichtlichen Ablauf bei
-            der Testung zur Bestimmung von SARS-CoV2 gewährleistet. Sie dient in erster Linie der Koordination von
-            Terminen und der Übermittlung eines positiven oder negativen Testergebnisses an Patienten und
-            Gesundheitsämter.
+            GetMeTested ist eine Plattform die einen geordneten, übersichtlichen, effizienten, effektiven und
+            transparenten Ablauf im Rahmen des SARS-CoV2 Tests gewährleistet. Die Platform dient in erster Linie den
+            Patienten, den Gesundheitsämter den Laboren und der Kassenärztlichen Vereinigungen und hilft bei der
+            Koordination von Terminen und der Übermittlung des individuellem persönlichen Testergebnisses.
         </p>
         <p>
-            Wir helfen ihnen einen Termin bei deiner nächsten Teststation auszumachen und ihreTestergebnisse so schnell
-            es geht einzusehen! Zur Erleichterung der Vorauswahl verwenden sie bitte zunächst die COV-App. Der
-            Fragebogen dient dazu festzustellen, ob eine weitere Testung nötig ist.
+            Wir helfen Dir einen Termin bei deiner nächsten Teststation auszumachen und Dein Testergebnis so schnell es
+            geht einzusehen! Zur Erleichterung der Vorauswahl verwende bitte zunächst die COV-App. Der Fragebogen dient
+            dazu festzustellen, ob eine weitere Testung nötig ist.
         </p>
         <div style={{display: "flex", textAlign: "center", flexDirection: "column"}}>
             <p>
