@@ -13,13 +13,28 @@ class Testzentrum {
 
         this.contactHours = new SortedSet(
             [],
-            (a, b) => a == b,
-            (a, b) => a.begin.unix() - b.begin.unix()
+            (a, b) => a.uuid == b.uuid,
+            (a, b) => a.begin.unix() - b.begin.unix() || a.id - b.id,
         );
     }
 
     addContactHours(contactHours) {
         this.contactHours.push(contactHours);
+    }
+
+    getContactHours(id) {
+        if (id == undefined) {
+            return this.contactHours;
+        } else {
+            var iterator = this.contactHours.iterate();
+            var contactHours;
+            while (contactHours = iterator.next().value) {
+                if (contactHours.uuid == id) {
+                    return contactHours;
+                }
+            }
+            return null;
+        }
     }
 
     findFreeTestSlot() {

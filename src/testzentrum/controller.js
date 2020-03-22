@@ -6,18 +6,22 @@ const mockData = require('../mock-data');
 const { Error, NotFound } = require('../error');
 
 function TestZentrumController() {
-    const testCenters = []
+    const testCenters = {};
 
     this.add = function (testCenterData) {
-        testCenters.push(testCenterData)
+        testCenters[testCenterData.uuid] = testCenterData;
     }
 
     this.list = function () {
-        return testCenters
+        return Object.values(testCenters);
+    }
+
+    this.get = function (uuid) {
+        return testCenters[uuid];
     }
 
     this.generateZeitSlots = function (uuid, parallel, durationInMinutes, fromHour, toHour) {
-        const foundCenter = testCenters.find(centrum => centrum.uuid === uuid);
+        const foundCenter = this.list().find(centrum => centrum.uuid === uuid);
         if(!foundCenter) {
             throw new NotFound(`No Test Center with UUID ${uuid}`);
         }
@@ -25,7 +29,7 @@ function TestZentrumController() {
     }
 
     this.findNearest = function (coords) {
-        var distances = testCenters.map((testCenter) => {
+        var distances = this.list().map((testCenter) => {
             return {
                 testCenter: testCenter,
                 distance: geolib.getDistance(coords, testCenter.koordinaten),

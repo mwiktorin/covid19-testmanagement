@@ -1,4 +1,5 @@
 const dayjs = require('dayjs');
+const { v4 } = require('uuid');
 
 class TestSlot {
   constructor (contactHours, slotId) {
@@ -35,6 +36,7 @@ class TestSlot {
 /// Timerange in which tests are conducted. Each test slot is of equal duration.
 class ContactHours {
   constructor (beginDate, timeSlotCount, slotDurationInMinutes) {
+    this.uuid = v4();
     this.begin = dayjs(beginDate);
     this.end = this.begin.add(timeSlotCount * slotDurationInMinutes, 'minute');
     this.timeSlots = timeSlotCount;
