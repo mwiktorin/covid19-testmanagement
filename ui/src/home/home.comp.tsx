@@ -17,10 +17,10 @@ export const Home = () => (
         </p>
         <div style={{display: "flex", textAlign: "center", flexDirection: "column"}}>
             <p>
-                <Link to={"/patient"} className={"link"}>Testtermin beantragen</Link>
+                <Link to={"/patient"} className={"link"}>Für Patienten: Testtermin beantragen</Link>
             </p>
             <p>
-                <Link to={"/testzentrum/register"} className={"link"}>Testzentrum registrieren</Link>
+                <Link to={"/testzentrum/register"} className={"link"}>Für Testzentren: Testzentrum registrieren</Link>
             </p>
         </div>
     </>
