@@ -26,9 +26,7 @@ class Testzentrum {
         if (id == undefined) {
             return this.contactHours;
         } else {
-            var iterator = this.contactHours.iterate();
-            var contactHours;
-            while (contactHours = iterator.next().value) {
+            for (var contactHours of Array.from(this.contactHours)) {
                 if (contactHours.uuid == id) {
                     return contactHours;
                 }
