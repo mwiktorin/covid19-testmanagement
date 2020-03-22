@@ -1,7 +1,8 @@
 export class TestzentrumDto {
-    constructor(private name: string,
-                private telefonnummer: string,
-                private anschrift: string,
-                private plz: string) {
+    constructor(public name: string,
+                public telefonnummer: string,
+                public anschrift: string,
+                public plz: string,
+                public uuid = "") {
     }
 }

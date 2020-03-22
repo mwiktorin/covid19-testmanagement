@@ -1,14 +1,12 @@
 const express = require('express');
 
 const Patient = require('./patient');
-const PatientController = require('./controller');
 const { PatientSession } = require('../session');
 
 const { defaultErrorWrapper } = require('../error');
 
-function PatientRouter() {
+function PatientRouter(patientController) {
     const router = express.Router();
-    const patientController = new PatientController();
 
     // define the home page route
     router.post('/', function (req, res) {
@@ -41,7 +39,7 @@ function PatientRouter() {
     }));
 
     router.get('/profil', defaultErrorWrapper(async function (req, res) {
-        if (!req.session.obj || req.session.obj.role != PatientSession.ROLE) {
+        if (!req.session.obj || req.session.obj.role !== PatientSession.ROLE) {
             res.sendStatus(400);
             return;
         }
@@ -57,7 +55,7 @@ function PatientRouter() {
         });
     }));
     router.put('/profil', defaultErrorWrapper(async function (req, res) {
-        if (!req.session.obj || req.session.obj.role != PatientSession.ROLE) {
+        if (!req.session.obj || req.session.obj.role !== PatientSession.ROLE) {
             res.sendStatus(400);
             return;
         }

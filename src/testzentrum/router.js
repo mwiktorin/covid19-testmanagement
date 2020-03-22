@@ -1,20 +1,19 @@
 const express = require('express');
 
-const PatientController = require('../patient/controller');
 const Testzentrum = require('./testzentrum');
 const TestCenterController = require('./controller');
+const GeoExterns = require("../extern/geo");
 
-const { defaultErrorWrapper } = require('../error');
+const {defaultErrorWrapper} = require('../error');
 
-function TestCenterRouter() {
+function TestCenterRouter(patientController) {
     const router = express.Router();
     const testCenterController = new TestCenterController();
-    const patientController = new PatientController();
 
     // define the home page route
     router.post('/', function (req, res) {
         const {name, telefonnummer, anschrift, plz} = req.body;
-        const coords = plzExterns.coordinatesForPostalCode(plz);
+        const coords = GeoExterns.coordinatesForPostalCode(plz);
         const testzentrum = new Testzentrum(name, telefonnummer, anschrift, plz, coords);
         testCenterController.add(testzentrum);
         res.status(200).json(testzentrum);
@@ -35,9 +34,9 @@ function TestCenterRouter() {
     router.post('/test-beantragen/:uuid', defaultErrorWrapper(async function (req, res) {
         // retrieve requestor data
         const uuid = req.params.uuid;
-        const patient = patientController.get(uuid);
+        const patient = patientController.getByUuid(uuid);
 
-        const { testCenter, testSlot } = await testCenterController.requestTestSlot(patient);
+        const {testCenter, testSlot} = await testCenterController.requestTestSlot(patient);
 
         // send answer
         res.status(200).json({

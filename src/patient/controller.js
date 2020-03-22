@@ -1,5 +1,3 @@
-const mockData = require('../mock-data');
-
 function PatientController() {
     const patienten = {};
 
@@ -15,14 +13,12 @@ function PatientController() {
         return patienten[uuid];
     };
     this.getByEmailAddress = function (emailAddress) {
-        return Object.values(patienten).find((patient) => patient.email == emailAddress);
+        return Object.values(patienten).find((patient) => patient.email === emailAddress);
     };
 
     this.checkPassword = function (patient, password) {
-        return patient.passwort == password;
+        return patient.passwort === password;
     };
-
-    mockData.mockPatients(this);
 }
 
 module.exports = PatientController;
