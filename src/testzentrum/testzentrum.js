@@ -1,4 +1,4 @@
-const { v4 }  = require("uuid");
+const {v4} = require("uuid");
 const SortedSet = require('collections/sorted-set');
 
 class Testzentrum {
@@ -38,19 +38,18 @@ class Testzentrum {
     }
 
     findFreeTestSlot() {
+        var array = Array.from(this.contactHours);
         var earliestSlot = null;
-        var contactHoursIt = this.contactHours.iterate();
         var contactHours;
-        while (contactHours = contactHoursIt.next().value) {
+        for (let i = 0; i < array.length; i++) {
+            contactHours = array[i];
             if (earliestSlot == null) {
                 earliestSlot = contactHours.findFreeSlot();
             } else if (contactHours.begin <= earliestSlot.begin) {
-
                 var freeSlot = contactHours.findFreeSlot();
                 if (freeSlot && freeSlot.begin < earliestSlot.begin) {
                     earliestSlot = freeSlot;
                 }
-
             } else {
                 // this.contactHours sorted by beginning date, so following
                 // contact hours would only yield later slots

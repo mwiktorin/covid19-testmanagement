@@ -1,9 +1,9 @@
 const express = require('express');
 
 const Patient = require('./patient');
-const { PatientSession } = require('../session');
+const {PatientSession} = require('../session');
 
-const { defaultErrorWrapper } = require('../error');
+const {defaultErrorWrapper} = require('../error');
 
 function PatientRouter(patientController) {
     const router = express.Router();
@@ -18,7 +18,7 @@ function PatientRouter(patientController) {
 
     // define the about route
     router.get('/', function (req, res) {
-        res.json(patientController.list());
+        res.status(200).json(patientController.list());
     });
 
 
