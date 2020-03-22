@@ -11,6 +11,10 @@ export class HttpService {
         return await Axios.post(`${host}${url}`, data);
     }
 
+    async put<T>(url: string, data: T): Promise<AxiosResponse<T>> {
+        return await Axios.put(`${host}${url}`, data);
+    }
+
     async delete(url: string) {
         return await Axios.delete(`${host}${url}`);
     }

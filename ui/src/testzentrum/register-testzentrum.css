@@ -26,6 +26,7 @@ form {
 }
 
 .form-row > input {
+    min-width: 150px;
     width: 250px;
 }
 

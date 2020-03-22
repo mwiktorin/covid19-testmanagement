@@ -6,8 +6,13 @@ import {Checkbox} from "primereact/checkbox";
 import {Button} from "primereact/button";
 import {PatientDto} from "./patient.dto";
 import {Growl} from "primereact/growl";
+import {TestzentrumService} from "../testzentrum/testzentrum.service";
+import {TestBeantragenResponseDto} from "../testzentrum/test-beantragen-response.dto";
+import {TerminBestaetigung} from "./termin-bestaetigung.comp";
+
 
 export interface PatientProps {
+    testzentrumService: TestzentrumService;
     patientService: PatientService;
 }
 
@@ -26,16 +31,31 @@ export const Patient = (props: PatientProps) => {
     const [telefonChecked, setTelefonChecked] = useState(false);
 
     const [growl, setGrowl] = useState();
+    const [termin, setTermin] = useState();
+
+    function beantrageTermin(patientDto: PatientDto) {
+        props.testzentrumService.beantrageTest(patientDto.uuid)
+            .then((beantragungResponse: TestBeantragenResponseDto) => {
+                setTermin(beantragungResponse);
+            })
+            .catch(() => {
+                growl.show({severity: 'error', summary: 'Kein Termin verfügbar'})
+            })
+    }
 
     const terminAnfragen = () => {
         props.patientService.addNewPatient(new PatientDto(nachname, vorname, geburtsdatum, versicherungsnummer, email, telefon, anschrift, postleitzahl, emailChecked, smsChecked, telefonChecked))
-            .then(() => {
-                growl.show({severity: 'success', summary: 'Anfrage erfolgreich'})
+            .then((patientDto: PatientDto) => {
+                beantrageTermin(patientDto);
             })
             .catch(() => {
-                growl.show({severity: 'error', summary: 'Anfrage fehlgeschlagen'})
+                growl.show({severity: 'error', summary: 'Patient anlegen fehlgeschlagen'})
             });
     };
+
+    if (termin) {
+        return <TerminBestaetigung termin={termin}/>
+    }
 
     return (
         <>

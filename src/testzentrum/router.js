@@ -1,7 +1,6 @@
 const express = require('express');
 const dayjs = require('dayjs');
 
-const PatientController = require('../patient/controller');
 const Testzentrum = require('./testzentrum');
 const TestCenterController = require('./controller');
 const { ContactHours, TestSlot } = require('../zeitslot/contacthours');
@@ -9,10 +8,9 @@ const GeoExterns = require('../extern/geo');
 
 const { defaultErrorWrapper, NotFound } = require('../error');
 
-function TestCenterRouter() {
+function TestCenterRouter(patientController) {
     const router = express.Router();
     const testCenterController = new TestCenterController();
-    const patientController = new PatientController();
 
     // define the home page route
     router.post('/', function (req, res) {
@@ -123,9 +121,9 @@ function TestCenterRouter() {
     router.post('/test-beantragen/:uuid', defaultErrorWrapper(async function (req, res) {
         // retrieve requestor data
         const uuid = req.params.uuid;
-        const patient = patientController.get(uuid);
+        const patient = patientController.getByUuid(uuid);
 
-        const { testCenter, testSlot } = await testCenterController.requestTestSlot(patient);
+        const {testCenter, testSlot} = await testCenterController.requestTestSlot(patient);
 
         // send answer
         res.status(200).json({
