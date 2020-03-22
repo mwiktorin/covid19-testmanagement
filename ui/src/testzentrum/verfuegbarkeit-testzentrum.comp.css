@@ -1,9 +1,17 @@
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
 .grid {
     display: grid;
-    grid-template-columns: repeat(6, auto);
+    grid-template-columns: repeat(3, auto);
     margin-bottom: 30px;
     align-items: center;
     grid-row-gap: 10px;
+    grid-column-gap: 10px;
 }
 
 .bottom-container {
@@ -11,6 +19,7 @@
     grid-template-columns: auto auto;
     align-items: center;
     grid-row-gap: 10px;
+    width: 100%;
 }
 
 .p-checkbox + label {
